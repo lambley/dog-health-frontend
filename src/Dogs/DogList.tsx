@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Dog from './Dog'
+import Search from '../Components/Search'
 import { IDog } from '../types/data'
 import axios from 'axios'
 
@@ -25,7 +26,7 @@ const DogList = () => {
   console.log(dogs)
   return(
     <div>
-      <h1>Browse all dogs</h1>
+      <Search/>
       <div className="row row-cols-1 row-cols-md-2 g-4">
         {dogs.map((dog:IDog) => (
           <Dog
