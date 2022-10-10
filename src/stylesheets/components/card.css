@@ -4,3 +4,11 @@
   object-fit: cover;
   object-position: top;
 }
+
+.card-text{
+  font-size:16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow:scroll;
+  overflow-y: hidden;
+}
