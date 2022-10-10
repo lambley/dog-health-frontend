@@ -1,6 +1,11 @@
+import DogList from '../Dogs/DogList'
+
 const Home = () => {
   return (
-    <h1>Find out your dog's ideal weight</h1>
+    <div>
+      <h1>Find out your dog's ideal weight</h1>
+      <DogList/>
+    </div>
   )
 }
 
