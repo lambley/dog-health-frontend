@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Dog Health",
+  "name": "Dog Health - Find your dog's ideal weight",
   "icons": [
     {
       "src": "favicon.ico",
