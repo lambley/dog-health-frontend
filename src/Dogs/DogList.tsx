@@ -1,34 +1,11 @@
-import { useState, useEffect } from 'react'
 import Dog from './Dog'
-import Search from '../Components/Search'
-import { IDog } from '../types/data'
-import axios from 'axios'
+import { IDogList, IDog } from '../types/data'
 
-const DogList = () => {
-  const [dogs, setDogs ] = useState<IDog[]>([])
-
-  useEffect(() => {
-    getDogs()
-  }, [])
-
-  const getDogs = async () => {
-    try {
-      const res = await axios.get('http://localhost:3000/api/v1/dogs')
-
-      const data = res.data
-
-      setDogs(data)
-    }
-    catch(error: any) {
-      console.log(error);
-    }
-  }
-  console.log(dogs)
-  return(
+const DogList = ({ dogList }:IDogList) => {
+   return(
     <div>
-      <Search/>
       <div className="row row-cols-1 row-cols-md-2 g-4">
-        {dogs.map((dog:IDog) => (
+        {dogList.map((dog:IDog) => (
           <Dog
             key={dog.id}
             breed={dog.breed}
