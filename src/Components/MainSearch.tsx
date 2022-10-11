@@ -5,7 +5,6 @@ import axios from 'axios'
 
 const Search = () => {
   const [input, setInput] = useState("")
-
   const [dogs, setDogs ] = useState<IDog[]>([])
 
   useEffect(() => {
@@ -32,7 +31,7 @@ const Search = () => {
 
   return(
     <div>
-      <h2>Browse all dogs - displaying </h2>
+      <h2>Browse all dogs - <em>displaying {dogs.length} dogs</em></h2>
       <form action="/" method="get">
         <label htmlFor="header-search">
           <span className="search-hidden">Search here:</span>
