@@ -11,8 +11,8 @@ const Dog = (props: IDog): React.ReactElement | null  => {
 
     return(
     <ul>
-      <li>Ideal weight range: {props.weight_metric}lbs | {props.weight_metric}kg</li>
-      <li>Ideal height range: {props.height_metric}lbs | {props.height_metric}kg</li>
+      <li>Ideal weight range: {props.weight_imperial}lbs | {props.weight_metric}kg</li>
+      <li>Ideal height range: {props.height_imperial}inches | {props.height_metric}cm</li>
       <li>Breed group: {props.breed_group}</li>
       <li>Role: {props.bred_for}</li>
       <li>Average lifespan: {props.life_span}</li>
