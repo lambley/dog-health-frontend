@@ -11,3 +11,7 @@ export interface IDog {
   temperament: string;
   reference_image_id: string;
 }
+
+export interface IDogList{
+  dogList: Array<IDog>
+}
