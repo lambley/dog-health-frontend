@@ -1,46 +1,88 @@
-# Getting Started with Create React App
+# dog-health-app
+RoR and React app to calculate dog's ideal weight
+- This is the frontend - API client repo is here: https://github.com/lambley/dog-health-api
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Initial setup instructions
+- project structure:
+```
+dog-health-app
+└api-client
+|   └───controllers
+|       └───api
+|           └───v1
+|               | dogs_controller.rb
+└───...
+└front-end
+└───...
+└───src
+|   └───Pages
+|   └───Components
+|       | MainSearch.tsx
+|   └───Dogs
+|       | DogList.tsx
+|       | Dog.tsx
+└───...
+```
+### Backend
+- `rails new api-client --api` to create app with api gems like `cors` inbuilt
+- amend cors policy in `config/initializers/cors.rb` to accept any cross-origin traffic:
+```
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins '*'
+resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+  end
+end
+```
+- generate dog model and controller - controller only needs index (but I've added show and create for future use)
+- ensure `dogs_controller#index` render a json response by adding:
+```
+@dogs = Dog.all
+render json: @dogs
+```
+- update routes like so:
+```
+  namespace :api do
+    namespace :v1 do
+      resources :dogs
+    end
+  end
+```
+- seed database from [The Dog API](https://thedogapi.com/) 
 
-## Available Scripts
+### Frontend
+- create app using `npx create-react-app front-end --template typescript`
+- set up port in .env file: `PORT=4000`
+- Install dependencies like `bootstrap`, `axios`, `react-router-dom`
 
-In the project directory, you can run:
+## Testing setup
+Backend - testing the API
+- add testing gems:
+```
+group :development, :test do
+  gem 'rspec-rails'
+end
+group :test do
+    gem 'factory_bot_rails'
+    gem 'faker'
+end
+```
+- install `rspec` using `rails generate rspec:install` - generates a spec folder with `rails_helper.rb` and `spec_helper.rb` files
+- setup `FactoryBot` in `spec/factrories.rb` to generate fake dog records like so:
+```
+FactoryBot.define do
+  factory :dog do
+    name: { some faker code }
+    etc.
+  end
+end
+```
 
-### `npm start`
+## Next steps
+- after finding the breed, select breed to see a form where user can add their dog's weight
+- after ideal dog's weight found, if too heavy: display tips for helping dog lose weight; if too low: display tips for gaining weight
+- add tab to search by "breed group" e.g. Toy and find dog there
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
