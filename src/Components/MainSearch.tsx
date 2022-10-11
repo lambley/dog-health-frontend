@@ -9,7 +9,7 @@ const Search = () => {
 
   useEffect(() => {
     getDogs()
-  }, [])
+  }, [input])
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement
@@ -17,8 +17,10 @@ const Search = () => {
   }
 
   const getDogs = async () => {
+    const url = `http://localhost:3000/api/v1/dogs?q=${input}`
+
     try {
-      const res = await axios.get('http://localhost:3000/api/v1/dogs')
+      const res = await axios.get(url)
 
       const data = res.data
 
