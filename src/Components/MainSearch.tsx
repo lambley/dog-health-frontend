@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react"
 import DogList from "../Dogs/DogList"
 import { IDog } from '../types/data'
 import axios from 'axios'
+import { env } from "process"
+
+// TODO: update the search to allow for more query parameters e.g. breed and characteristics
 
 const Search = () => {
   const [input, setInput] = useState("")
@@ -17,10 +20,10 @@ const Search = () => {
   }
 
   const getDogs = async () => {
-    const url = `http://localhost:3000/api/v1/dogs?q=${input}`
+    const url = process.env.REACT_APP_ROOTURL
 
     try {
-      const res = await axios.get(url)
+      const res = await axios.get(`${url}?q=${input}`)
 
       const data = res.data
 
